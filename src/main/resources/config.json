@@ -1,0 +1,20 @@
+{
+  "lobby":{
+    "redis": {
+      "port": "",
+      "host": "",
+      "pass": ""
+    },
+    "sql": {
+      "port": "",
+      "host": "",
+      "user": "",
+      "pass": "",
+      "dbname": ""
+    },
+    "config": {
+      "server_name": "",
+      "server_ip": ""
+    }
+  }
+}

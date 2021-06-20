@@ -1,0 +1,4 @@
+name: ProxyPtero
+version: ${project.version}
+main: net.TokyoSlayer.ProxyPtero.Main
+author: TokyoSlayer
