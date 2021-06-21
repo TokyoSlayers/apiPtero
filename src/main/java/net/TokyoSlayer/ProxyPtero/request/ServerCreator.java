@@ -3,10 +3,7 @@ package net.TokyoSlayer.ProxyPtero.request;
 import net.TokyoSlayer.ProxyPtero.Main;
 import net.TokyoSlayer.ProxyPtero.server.Type;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServerCreator {
@@ -22,8 +19,8 @@ public class ServerCreator {
     }
 
     public void createAll(){
+        List<String> names = new ArrayList<>(getEggs().values());
         for (int i = 0; i < 3; i++) {
-            List<String> names = (List<String>) getEggs().values();
             String name = names.get(i);
             String egg = getEggs().get(name);
             if(ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
