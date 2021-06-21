@@ -18,11 +18,12 @@ public final class Main extends Plugin {
     private Files files;
     private PteroClient client;
     private PteroApplication app;
+    private Plugin plugin;
 
     @Override
     public void onEnable() {
         this.files = new Files();
-        files.load(this,"config");
+        files.load(plugin,"config");
         this.sql = new SqlManager(new SqlConnection(files.translate("lobby.sql.host"),files.translate("lobby.sql.user"),files.translate("lobby.sql.pass"),files.translate("lobby.sql.dbname"),files.translateInt("lobby.sql.port")));
         this.redis = new RedisConnection(files.translate("lobby.redis.host"),files.translate("lobby.redis.pass"),files.translateInt("lobby.redis.port"));
         this.app = PteroBuilder.createApplication(files.translate("lobby.ptero.url"), files.translate("lobby.ptero.token.app"));

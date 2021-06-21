@@ -3,6 +3,7 @@ package net.TokyoSlayer.ProxyPtero.utils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.TokyoSlayer.ProxyPtero.Main;
+import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.IOException;
 import java.util.*;
@@ -38,7 +39,7 @@ public class Files {
 
     }
 
-    public void load(final Main pl, final String file) {
+    public void load(final Plugin pl, final String file) {
         try {
             Object objet = JsonParser.parseString(FileUtils.loadContent(fileUtils.buildFile(pl, file)));
             JsonObject jsonObject = (JsonObject) objet;
