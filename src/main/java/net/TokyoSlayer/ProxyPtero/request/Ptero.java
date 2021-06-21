@@ -70,6 +70,7 @@ public class Ptero {
     }
 
     public void servCreator(String name,String eggID){
+        System.out.println("Création du serveur en cours...");
         int i = servPerNode();
         int port = 0;
         if(i == 2){
