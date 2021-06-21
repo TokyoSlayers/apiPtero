@@ -1,4 +1,4 @@
-package net.TokyoSlayer.ProxyPtero.DataBase.Sql;
+package net.TokyoSlayer.ProxyPtero.database.Sql;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -37,7 +37,9 @@ public class SqlAccess {
     }
 
     public void closePool(){
-        this.hikariDataSource.close();
+        if(this.hikariDataSource != null) {
+            this.hikariDataSource.close();
+        }
     }
 
     public Connection getConnection() throws SQLException {

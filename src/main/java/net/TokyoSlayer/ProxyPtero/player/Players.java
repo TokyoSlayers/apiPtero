@@ -1,7 +1,7 @@
-package net.TokyoSlayer.ProxyPtero.Player;
+package net.TokyoSlayer.ProxyPtero.player;
 
-import net.TokyoSlayer.ProxyPtero.DataBase.Redis.RedisData;
-import net.TokyoSlayer.ProxyPtero.DataBase.Sql.SqlManager;
+import net.TokyoSlayer.ProxyPtero.database.Redis.RedisData;
+import net.TokyoSlayer.ProxyPtero.database.Sql.SqlManager;
 import net.TokyoSlayer.ProxyPtero.Main;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 

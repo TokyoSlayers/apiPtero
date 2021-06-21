@@ -1,13 +1,13 @@
-package net.TokyoSlayer.ProxyPtero.DataBase.Sql;
+package net.TokyoSlayer.ProxyPtero.database.Sql;
 
 public class SqlConnection {
     private final String host;
     private final String user;
     private final String pass;
     private final String dbName;
-    private final String port;
+    private final int port;
 
-    public SqlConnection(String host, String user, String pass, String dbName, String port) {
+    public SqlConnection(String host, String user, String pass, String dbName, int port) {
         this.host = host;
         this.user = user;
         this.pass = pass;

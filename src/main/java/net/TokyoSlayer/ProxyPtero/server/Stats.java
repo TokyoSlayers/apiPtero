@@ -1,4 +1,4 @@
-package net.TokyoSlayer.ProxyPtero.Server;
+package net.TokyoSlayer.ProxyPtero.server;
 
 public enum Stats {
     BOOTING("§cDémarrage..."),

@@ -1,4 +1,4 @@
-package net.TokyoSlayer.ProxyPtero.Player;
+package net.TokyoSlayer.ProxyPtero.player;
 
 import java.util.UUID;
 

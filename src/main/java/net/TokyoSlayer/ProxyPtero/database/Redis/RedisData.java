@@ -1,9 +1,9 @@
-package net.TokyoSlayer.ProxyPtero.DataBase.Redis;
+package net.TokyoSlayer.ProxyPtero.database.Redis;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.TokyoSlayer.ProxyPtero.Player.Account;
-import net.TokyoSlayer.ProxyPtero.Server.Server;
+import net.TokyoSlayer.ProxyPtero.player.Account;
+import net.TokyoSlayer.ProxyPtero.server.Server;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package net.TokyoSlayer.ProxyPtero.DataBase.Sql;
+package net.TokyoSlayer.ProxyPtero.database.Sql;
 
 import java.math.BigDecimal;
 import java.sql.*;

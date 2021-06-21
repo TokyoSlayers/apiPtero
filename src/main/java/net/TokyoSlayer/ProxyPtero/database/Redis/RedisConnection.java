@@ -1,4 +1,4 @@
-package net.TokyoSlayer.ProxyPtero.DataBase.Redis;
+package net.TokyoSlayer.ProxyPtero.database.Redis;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -11,20 +11,13 @@ import java.util.stream.Collectors;
 
 public class RedisConnection {
 
-    private final JedisPool jedisPool;
-    private final Jedis jedis;
+    private Jedis jedis;
 
-    public RedisConnection(String host, String pass, String port) {
+    public RedisConnection(String host, String pass, int port) {
         JedisPoolConfig config = new JedisPoolConfig();
-        this.jedisPool = new JedisPool(config, host, Integer.parseInt(port), 300, pass);
-        this.jedis = this.getJedis();
+        JedisPool jedisPool = new JedisPool(config, host, port, 400, pass);
+        this.jedis = jedisPool.getResource();
     }
-
-    public Jedis getJedis() {
-        return this.jedisPool.getResource();
-    }
-
-    public JedisPool getJedisPool(){return this.jedisPool; }
 
     public void set(String key, String value) {
         this.jedis.set(key, value);
@@ -41,7 +34,7 @@ public class RedisConnection {
     }
 
     public void del(String key){
-        getJedis().del(SafeEncoder.encode(key));
+        jedis.del(SafeEncoder.encode(key));
         System.out.println("delete key : "+ key);
     }
 
@@ -67,7 +60,7 @@ public class RedisConnection {
     }
 
     public Pipeline pipelined() {
-        return this.jedisPool.getResource().pipelined();
+        return jedis.pipelined();
     }
 
     public List<Object> getValues(List<String> keys) {

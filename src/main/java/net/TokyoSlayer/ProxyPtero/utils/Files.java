@@ -8,18 +8,34 @@ import java.io.IOException;
 import java.util.*;
 
 public class Files {
+
     private final FileUtils fileUtils = new FileUtils();
 
-    public void object(JsonObject jsonobj) throws IOException {
+    public void toMap(String path,JsonObject jsonobj)  throws IOException {
         Iterator<String> keys = jsonobj.keySet().iterator();
         while(keys.hasNext()) {
             String key = keys.next();
             Object value = jsonobj.get(key);
-            extraTexts.put(key,value);
-            if(value instanceof JsonObject){
-                object((JsonObject) value);
+            if (value instanceof JsonObject) {
+                String newPath = String.format("%s%s%s", path, path.equals("") ? "" : ".", key);
+                toList(newPath, (JsonObject) value);
+                this.toMap(newPath, (JsonObject) value);
             }
         }
+    }
+
+    public void toList(String path,JsonObject obj) throws IOException {
+        if(!path.endsWith("lobby")) {
+            ArrayList<String> value = new ArrayList<>(obj.keySet());
+
+            value.forEach(s -> extraTexts.put(path +"."+s, obj.get(s)));
+        }
+    }
+
+
+    public void object(JsonObject jsonobj) throws IOException {
+        toMap("",jsonobj);
+
     }
 
     public void load(final Main pl, final String file) {
@@ -38,32 +54,23 @@ public class Files {
         return this.extraTexts;
     }
 
-    public String translateRedis(String key) {
-        final String translation;
+    public int translateInt(String key) {
+        final int translation;
         if (!this.getExtraTexts().containsKey(key.toLowerCase())) {
-            return String.format("Error : Message error (%s) ", key.toLowerCase());
+            return 404;
         } else {
-            translation = this.getExtraTexts().get(key.toLowerCase()).toString().replace("&","§");
+            translation = Integer.parseInt(this.getExtraTexts().get(key.toLowerCase()).toString());
         }
         return translation;
     }
 
-    public String translate(String key, Object... args) {
+    public String translate(String key) {
         final String translation;
         if (!this.getExtraTexts().containsKey(key.toLowerCase())) {
             return String.format("Error : Message error (%s) ", key.toLowerCase());
         } else {
             translation = this.getExtraTexts().get(key.toLowerCase()).toString().replace("&","§");
         }
-        if(args == null){
-            return translation;
-        }else {
-            try {
-                return String.format(translation, args);
-            } catch (IllegalFormatException e) {
-                System.out.println(String.format("Error while formatting translation (%s)", key.toLowerCase()));
-                return translation + " (Format error)";
-            }
-        }
+        return translation.replace("\"","");
     }
 }
