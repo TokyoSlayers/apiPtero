@@ -22,8 +22,9 @@ public class ServerCreator {
     }
 
     public void createAll(){
-        for (int i = 1; i < 6; i++) {
-            String name = Type.getListName().get(i);
+        for (int i = 0; i < 3; i++) {
+            List<String> names = (List<String>) getEggs().values();
+            String name = names.get(i);
             String egg = getEggs().get(name);
             if(ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
                 ptero.setNbrServType(name, ptero.getNbrServ(name) + 1);
