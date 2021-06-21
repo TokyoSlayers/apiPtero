@@ -105,7 +105,7 @@ public class Ptero {
 
         ApplicationServer server = action.execute();
         Link created = new Link(name,client,server,this,main);
-        task.put(server.getIdentifier(),this.main.getProxy().getScheduler().schedule(main, created, 0, 10,TimeUnit.SECONDS));
+        task.put(server.getIdentifier(),this.main.getPlugin().getProxy().getScheduler().schedule(main.getPlugin(), created, 0, 10,TimeUnit.SECONDS));
     }
 
     private int servPerNode(){

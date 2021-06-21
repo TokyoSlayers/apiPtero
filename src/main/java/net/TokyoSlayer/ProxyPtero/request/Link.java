@@ -31,7 +31,7 @@ public class Link implements Runnable {
                 client.setPower(clientServer, PowerAction.START).execute();
             }else if(client.retrieveUtilization(client.retrieveServerByIdentifier(server.getIdentifier()).execute()).execute().getState() == UtilizationState.RUNNING) {
                 ptero.createLink(server,name);
-                main.getProxy().getScheduler().cancel(ptero.task.get(server.getIdentifier()).getId());
+                main.getPlugin().getProxy().getScheduler().cancel(ptero.task.get(server.getIdentifier()).getId());
             }
         }
     }

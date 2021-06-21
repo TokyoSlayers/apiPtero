@@ -10,7 +10,7 @@ import net.TokyoSlayer.ProxyPtero.database.Sql.SqlManager;
 import net.TokyoSlayer.ProxyPtero.utils.Files;
 import net.md_5.bungee.api.plugin.Plugin;
 
-public final class Main extends Plugin {
+public final class Main {
 
     private SqlManager sql;
     private RedisConnection redis;
@@ -20,8 +20,8 @@ public final class Main extends Plugin {
     private PteroApplication app;
     private Plugin plugin;
 
-    @Override
-    public void onEnable() {
+    public void onEnable(Plugin plugin) {
+        this.plugin = plugin;
         this.files = new Files();
         files.load(plugin,"config");
         this.sql = new SqlManager(new SqlConnection(files.translate("lobby.sql.host"),files.translate("lobby.sql.user"),files.translate("lobby.sql.pass"),files.translate("lobby.sql.dbname"),files.translateInt("lobby.sql.port")));
@@ -32,11 +32,12 @@ public final class Main extends Plugin {
         data = new RedisData(redis);
     }
 
-    @Override
     public void onDisable() {
         this.sql.close();
         this.redis.delAll();
     }
+
+    public Plugin getPlugin() {return plugin;}
 
     public Files getFiles() { return files; }
 

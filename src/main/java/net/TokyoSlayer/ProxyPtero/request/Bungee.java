@@ -17,21 +17,21 @@ public class Bungee {
 
     public void create(String name,String ip,Integer port) {
         String nameExactrly = name.replace(' ','_');
-        ServerInfo info = main.getProxy().constructServerInfo(nameExactrly, new InetSocketAddress(ip, port), name, false);
-        main.getLogger().info("Adding the server...");
+        ServerInfo info = main.getPlugin().getProxy().constructServerInfo(nameExactrly, new InetSocketAddress(ip, port), name, false);
+        main.getPlugin().getLogger().info("Adding the server...");
 
-        main.getProxy().getServersCopy().put(info.getName(), info);
+        main.getPlugin().getProxy().getServersCopy().put(info.getName(), info);
     }
 
     public void delete(String serverName) {
-        ServerInfo info = main.getProxy().getServerInfo(serverName);
+        ServerInfo info = main.getPlugin().getProxy().getServerInfo(serverName);
         if (info != null){
-            main.getLogger().info("Removing the server...");
+            main.getPlugin().getLogger().info("Removing the server...");
             TextComponent reason = new TextComponent("You were kicked because the server was removed.");
             for (ProxiedPlayer player : info.getPlayers()) {
                 player.disconnect(reason);
             }
-            main.getProxy().getServersCopy().remove(info.getName());
+            main.getPlugin().getProxy().getServersCopy().remove(info.getName());
         }
     }
 }
