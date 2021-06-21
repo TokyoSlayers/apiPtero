@@ -1,20 +1,28 @@
 {
   "lobby":{
     "redis": {
-      "port": "",
+      "port": 6000,
       "host": "",
       "pass": ""
     },
     "sql": {
-      "port": "",
+      "port": 3306,
       "host": "",
       "user": "",
       "pass": "",
       "dbname": ""
     },
-    "config": {
+    "bungee": {
       "server_name": "",
       "server_ip": ""
+    },
+    "ptero": {
+      "url": "",
+      "token": {
+        "client": "",
+        "app": ""
+      },
+      "maxnbrserv": 2
     }
   }
 }
