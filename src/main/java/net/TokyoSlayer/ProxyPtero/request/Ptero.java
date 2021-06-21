@@ -27,7 +27,7 @@ public class Ptero {
     private final PteroClient client;
     private final RedisData data;
 
-    private Map<String,Integer> nbrServType = new HashMap<>();
+    private final Map<String,Integer> nbrServType = new HashMap<>();
     public final Map<String, ScheduledTask> task = new HashMap<>();
 
     private final List<Allocation> allocation = new ArrayList<>();
@@ -62,6 +62,9 @@ public class Ptero {
                 ClientServer clientServer = client.retrieveServerByIdentifier(applicationServer.getIdentifier()).execute();
                 client.setPower(clientServer, PowerAction.KILL).execute();
                 applicationServer.getController().delete(false).execute();
+
+                List<String> t = Type.getListName().stream().filter(s -> s.contains(name.replace(" ","_"))).collect(Collectors.toList());
+                removeNbrServerType(t.get(0));
             }
         });
     }
@@ -83,6 +86,7 @@ public class Ptero {
         map.put("SERVER_JARFILE", EnvironmentValue.ofString("server.jar"));
         map.put("MINECRAFT_VERSION", EnvironmentValue.ofString("1.16.5"));
 
+        setNbrServType(name);
         int nbr = nbrServType.get(name);
 
         PteroAction<ApplicationServer> action = app.createServer()
@@ -186,11 +190,17 @@ public class Ptero {
         return nbrServType.get(typeName);
     }
 
-    public void setNbrServType(String typeName,int nbr) {
+    public void removeNbrServerType(String typeName){
         if(nbrServType.containsKey(typeName)){
-            this.nbrServType.replace(typeName,nbr);
+            this.nbrServType.replace(typeName,getNbrServ(typeName)-1);
+        }
+    }
+
+    public void setNbrServType(String typeName) {
+        if(nbrServType.containsKey(typeName)){
+            this.nbrServType.replace(typeName,getNbrServ(typeName)+1);
         }else {
-            this.nbrServType.put(typeName, nbr);
+            this.nbrServType.put(typeName,1);
         }
     }
 }

@@ -4,7 +4,6 @@ import net.TokyoSlayer.ProxyPtero.Main;
 import net.TokyoSlayer.ProxyPtero.server.Type;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ServerCreator {
 
@@ -15,7 +14,6 @@ public class ServerCreator {
     public ServerCreator(Main main){
         this.main = main;
         this.ptero = new Ptero(main);
-        Type.getListName().forEach(s -> ptero.setNbrServType(s,0));
     }
 
     public void createAll(){
@@ -24,7 +22,6 @@ public class ServerCreator {
             String name = names.get(i);
             String egg = getEggs().get(name);
             if(ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
-                ptero.setNbrServType(name, ptero.getNbrServ(name) + 1);
                 ptero.servCreator(name, egg);
             }else{
                 System.out.println("max server for type" +name);
@@ -39,7 +36,6 @@ public class ServerCreator {
     public void create(String type){
         String egg = getEggs().get(type);
         if(ptero.getNbrServ(type) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
-            ptero.setNbrServType(type, ptero.getNbrServ(type) + 1);
             ptero.servCreator(type, egg);
         }else{
             System.out.println("max server for type " +type);
