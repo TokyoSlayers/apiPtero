@@ -20,17 +20,7 @@ public class ServerCreator {
         List<String> names = new ArrayList<>(getEggs().values());
         for (int i = 0; i < 5; i++) {
             String name = names.get(i);
-            String egg = getEggs().get(name);
-            if(!ptero.mapExist(name)) {
-                ptero.servCreator(name, egg);
-            }else {
-                if (ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
-                    ptero.servCreator(name, egg);
-                } else {
-                    System.out.println("max server for type" + name);
-                }
-            }
-            ptero.setNbrServType(name);
+            create(name);
         }
     }
 
@@ -40,11 +30,17 @@ public class ServerCreator {
 
     public void create(String type){
         String egg = getEggs().get(type);
-        if(ptero.getNbrServ(type) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
+
+        if(!ptero.mapExist(type)) {
             ptero.servCreator(type, egg);
-        }else{
-            System.out.println("max server for type " +type);
+        }else {
+            if (ptero.getNbrServ(type) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
+                ptero.servCreator(type, egg);
+            } else {
+                System.out.println("max server for type" + type);
+            }
         }
+        ptero.setNbrServType(type);
     }
 
     public void delete(String name){
