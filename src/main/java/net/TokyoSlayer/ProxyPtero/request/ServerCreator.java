@@ -35,17 +35,12 @@ public class ServerCreator {
     }
 
     public void create(String type){
-        if(ptero.eggId(type).equals("null")){
-            System.out.println(type + " n'à pas été trouvé!");
-        }else {
-            System.out.println(type + " à été trouvé!\nCréation du serveur en cours...");
-
-            if(ptero.getNbrServ(type) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
-                ptero.setNbrServType(type, ptero.getNbrServ(type) + 1);
-                ptero.servCreator(type, ptero.eggId(type));
-            }else{
-                System.out.println("max server for type " +type);
-            }
+        String egg = getEggs().get(type);
+        if(ptero.getNbrServ(type) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
+            ptero.setNbrServType(type, ptero.getNbrServ(type) + 1);
+            ptero.servCreator(type, egg);
+        }else{
+            System.out.println("max server for type " +type);
         }
     }
 

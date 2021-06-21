@@ -71,10 +71,8 @@ public class Ptero {
         int port = 0;
         if(i == 2){
             port = node1.get(new Random().nextInt(node1.size()));
-            node1.remove(port);
         }else if(i == 3){
             port = node2.get(new Random().nextInt(node2.size()));
-            node1.remove(port);
         }
 
         Nest nest = app.retrieveNestById("8").execute();
@@ -104,6 +102,11 @@ public class Ptero {
                 .setEnvironment(map);
 
         ApplicationServer server = action.execute();
+        if(i == 2){
+            node1.remove(port);
+        }else if(i == 3){
+            node2.remove(port);
+        }
         Link created = new Link(name,client,server,this,main);
         task.put(server.getIdentifier(),this.main.getPlugin().getProxy().getScheduler().schedule(main.getPlugin(), created, 0, 10,TimeUnit.SECONDS));
     }
