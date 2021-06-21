@@ -86,7 +86,6 @@ public class Ptero {
         map.put("SERVER_JARFILE", EnvironmentValue.ofString("server.jar"));
         map.put("MINECRAFT_VERSION", EnvironmentValue.ofString("1.16.5"));
 
-        setNbrServType(name);
         int nbr = nbrServType.get(name);
 
         PteroAction<ApplicationServer> action = app.createServer()
@@ -190,8 +189,14 @@ public class Ptero {
         return nbrServType.get(typeName);
     }
 
+    public boolean mapExist(String type){
+        return nbrServType.containsKey(type);
+    }
+
     public void removeNbrServerType(String typeName){
-        if(nbrServType.containsKey(typeName)){
+        if(nbrServType.get(typeName) == 1){
+            this.nbrServType.remove(typeName);
+        }else if(nbrServType.containsKey(typeName)){
             this.nbrServType.replace(typeName,getNbrServ(typeName)-1);
         }
     }

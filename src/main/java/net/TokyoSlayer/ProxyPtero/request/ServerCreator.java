@@ -21,11 +21,15 @@ public class ServerCreator {
         for (int i = 0; i < 3; i++) {
             String name = names.get(i);
             String egg = getEggs().get(name);
+            if(ptero.mapExist(name)) {
+                ptero.servCreator(name, egg);
+            }
             if(ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
                 ptero.servCreator(name, egg);
             }else{
                 System.out.println("max server for type" +name);
             }
+            ptero.setNbrServType(name);
         }
     }
 
