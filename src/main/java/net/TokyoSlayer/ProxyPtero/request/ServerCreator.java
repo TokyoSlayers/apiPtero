@@ -3,9 +3,11 @@ package net.TokyoSlayer.ProxyPtero.request;
 import net.TokyoSlayer.ProxyPtero.Main;
 import net.TokyoSlayer.ProxyPtero.server.Type;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ServerCreator {
 
@@ -20,14 +22,16 @@ public class ServerCreator {
     }
 
     public void createAll(){
-        getEggs().forEach((name, nameEgg) -> {
+        for (int i = 1; i < 6; i++) {
+            String name = Type.getListName().get(i);
+            String egg = getEggs().get(name);
             if(ptero.getNbrServ(name) < main.getFiles().translateInt("lobby.ptero.maxnbrserv")) {
                 ptero.setNbrServType(name, ptero.getNbrServ(name) + 1);
-                ptero.servCreator(name, nameEgg);
+                ptero.servCreator(name, egg);
             }else{
                 System.out.println("max server for type" +name);
             }
-        });
+        }
     }
 
     public void deleteAll(){
